@@ -37,6 +37,8 @@ black.onclick = function(){
     green.classList.remove('active')
     blue.classList.remove('active')
     red.classList.remove('active')
+    yellow.classList.remove('active')
+    orange.classList.remove('active')
 }
 
 red.onclick = function(){
@@ -46,6 +48,8 @@ red.onclick = function(){
     green.classList.remove('active')
     blue.classList.remove('active')
     black.classList.remove('active')
+    yellow.classList.remove('active')
+    orange.classList.remove('active')
 }
 
 green.onclick = function(){
@@ -55,6 +59,8 @@ green.onclick = function(){
     red.classList.remove('active')
     blue.classList.remove('active')
     black.classList.remove('active')
+    yellow.classList.remove('active')
+    orange.classList.remove('active')
 }
 
 blue.onclick = function(){
@@ -64,6 +70,30 @@ blue.onclick = function(){
     red.classList.remove('active')
     green.classList.remove('active')
     black.classList.remove('active')
+    yellow.classList.remove('active')
+    orange.classList.remove('active')
+}
+
+yellow.onclick = function(){
+    context.fillStyle = 'yellow'
+    context.strokeStyle = 'yellow'
+    yellow.classList.add('active')
+    red.classList.remove('active')
+    green.classList.remove('active')
+    black.classList.remove('active')
+    blue.classList.remove('active')
+    orange.classList.remove('active')
+}
+
+orange.onclick = function(){
+    context.fillStyle = 'orange'
+    context.strokeStyle = 'orange'
+    orange.classList.add('active')
+    red.classList.remove('active')
+    green.classList.remove('active')
+    black.classList.remove('active')
+    yellow.classList.remove('active')
+    blue.classList.remove('active')
 }
 
 thin.onclick = function(){
@@ -121,9 +151,10 @@ function listenToUser(canvas){
             var y = a.touches[0].clientY;
             using = true;
             if(eraserEnabled){
-              context.clearRect(x-10,y-10,20,20)
+              context.clearRect(x-10,y-10,lineWidth*4,lineWidth*4)
             }else {
               lastPoint = {'x': x, 'y': y}
+              drawCircle(x,y,lineWidth/2)
               }
         }
         canvas.ontouchmove = function(a){
@@ -133,7 +164,7 @@ function listenToUser(canvas){
             if(!using){return}
             
             if(eraserEnabled){
-              context.clearRect(x-10,y-10,20,20)
+              context.clearRect(x-10,y-10,lineWidth*4,lineWidth*4)
             } else {
               var newPoint = {'x': x, 'y': y} 
               drawCircle(x,y,lineWidth/2)  
@@ -153,9 +184,10 @@ function listenToUser(canvas){
             var y = a.clientY;
             using = true;
             if(eraserEnabled){
-              context.clearRect(x-10,y-10,20,20)
+              context.clearRect(x-10,y-10, lineWidth*4, lineWidth*4)
             }else {
               lastPoint = {'x': x, 'y': y}
+              drawCircle(x,y,lineWidth/2)
               }
           }
       
@@ -166,7 +198,7 @@ function listenToUser(canvas){
             if(!using){return}
             
             if(eraserEnabled){
-              context.clearRect(x-10,y-10,20,20)
+              context.clearRect(x-10,y-10, lineWidth*4, lineWidth*4)
             } else {
               var newPoint = {'x': x, 'y': y}
               drawCircle(x,y,lineWidth/2)  
