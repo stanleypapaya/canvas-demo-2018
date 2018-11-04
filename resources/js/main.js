@@ -7,6 +7,7 @@ autoSetCanvasSize(yyy)
 
 listenToUser(yyy)
 
+var lineWidth = 5
 
 var eraserEnabled = false
 eraser.onclick = function(){
@@ -21,11 +22,29 @@ brush.onclick = function(){
   eraser.classList.remove('active')
 }
 
+clear.onclick = function(){
+    context.clearRect(0,0,yyy.width,yyy.height)
+}
+
+download.onclick = function(){
+    var image = yyy.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+    window.location.href=image; // it will save locally
+}
+
+black.onclick = function(){
+    context.strokeStyle = 'black'
+    black.classList.add('active')
+    green.classList.remove('active')
+    blue.classList.remove('active')
+    red.classList.remove('active')
+}
+
 red.onclick = function(){
     context.strokeStyle = 'red'
     red.classList.add('active')
     green.classList.remove('active')
     blue.classList.remove('active')
+    black.classList.remove('active')
 }
 
 green.onclick = function(){
@@ -33,6 +52,7 @@ green.onclick = function(){
     green.classList.add('active')
     red.classList.remove('active')
     blue.classList.remove('active')
+    black.classList.remove('active')
 }
 
 blue.onclick = function(){
@@ -40,12 +60,21 @@ blue.onclick = function(){
     blue.classList.add('active')
     red.classList.remove('active')
     green.classList.remove('active')
+    black.classList.remove('active')
+}
+
+thin.onclick = function(){
+    lineWidth = 5
+}
+
+thick.onclick = function(){
+    lineWidth = 10
 }
 
 function drawLine(x1,y1,x2,y2){
   context.beginPath()
   context.moveTo(x1,y1)//起点
-  context.lineWidth = 5
+  context.lineWidth = lineWidth
   context.lineTo(x2,y2)//终点
   context.stroke()
   context.closePath()

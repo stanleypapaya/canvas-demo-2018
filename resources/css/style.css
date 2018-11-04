@@ -2,6 +2,9 @@
 #xxx{
     background: white;
     display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 body{
@@ -55,6 +58,11 @@ body{
     -o-border-radius: 50%;
 }
 
+
+.colors > li.black{
+    background: black;
+}
+
 .colors > li.red{
     background: red;
 }
@@ -69,4 +77,23 @@ body{
 
 .colors > li.active{
     box-shadow: 0 0 5px rgba(0,0,0,0.95)
+}
+
+.size{
+    position: fixed;
+    right: 20px;
+    top: 30px;
+}
+
+.size > .thin{
+    height: 0;
+    width: 20px;
+    border-top: 5px solid black;
+    margin-bottom: 20px
+}
+
+.size > .thick{
+    height: 0;
+    width: 20px;
+    border-top: 10px solid black;
 }
