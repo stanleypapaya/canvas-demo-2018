@@ -4,7 +4,6 @@ var context = yyy.getContext('2d');
 
 autoSetCanvasSize(yyy)
 
-
 listenToUser(yyy)
 
 var lineWidth = 5
@@ -32,6 +31,7 @@ download.onclick = function(){
 }
 
 black.onclick = function(){
+    context.fillStyle = 'black'
     context.strokeStyle = 'black'
     black.classList.add('active')
     green.classList.remove('active')
@@ -40,6 +40,7 @@ black.onclick = function(){
 }
 
 red.onclick = function(){
+    context.fillStyle = 'red'
     context.strokeStyle = 'red'
     red.classList.add('active')
     green.classList.remove('active')
@@ -48,6 +49,7 @@ red.onclick = function(){
 }
 
 green.onclick = function(){
+    context.fillStyle = 'green'
     context.strokeStyle = 'green'
     green.classList.add('active')
     red.classList.remove('active')
@@ -56,6 +58,7 @@ green.onclick = function(){
 }
 
 blue.onclick = function(){
+    context.fillStyle = 'blue'
     context.strokeStyle = 'blue'
     blue.classList.add('active')
     red.classList.remove('active')
@@ -71,6 +74,12 @@ thick.onclick = function(){
     lineWidth = 10
 }
 
+function drawCircle(x,y,radius){
+    context.beginPath();
+    context.arc(x,y,radius,0,Math.PI*2);
+    context.fill();
+}
+  
 function drawLine(x1,y1,x2,y2){
   context.beginPath()
   context.moveTo(x1,y1)//起点
@@ -126,7 +135,8 @@ function listenToUser(canvas){
             if(eraserEnabled){
               context.clearRect(x-10,y-10,20,20)
             } else {
-              var newPoint = {'x': x, 'y': y}  
+              var newPoint = {'x': x, 'y': y} 
+              drawCircle(x,y,lineWidth/2)  
               drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)   
               lastPoint = newPoint   
             }
@@ -158,7 +168,8 @@ function listenToUser(canvas){
             if(eraserEnabled){
               context.clearRect(x-10,y-10,20,20)
             } else {
-              var newPoint = {'x': x, 'y': y}  
+              var newPoint = {'x': x, 'y': y}
+              drawCircle(x,y,lineWidth/2)  
               drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)   
               lastPoint = newPoint   
             }
