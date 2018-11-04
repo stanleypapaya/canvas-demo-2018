@@ -4,14 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canvas</title>
+    <link rel="stylesheet" href="./resources/css/reset.css">
     <link rel="stylesheet" href="./resources/css/style.css">
+    <style type="text/css">
+        .icon {
+           width: 1em; height: 1em;
+           vertical-align: -0.15em;
+           fill: currentColor;
+           overflow: hidden;
+        }
+    </style>
 </head>
 <body>
     <canvas id="xxx" width=300 height=300></canvas>
     <div id=actions class="actions">
-        <button id=eraser>橡皮擦</button>
-        <button id=brush>画笔</button>
+        <svg id=brush class="active icon">
+            <use xlink:href="#icon-cc-pencil"></use>
+        </svg>
+        <svg id=eraser class="icon">
+            <use xlink:href="#icon-eraser"></use>
+        </svg>
     </div>
+    <ol class="colors">
+        <li id=red class="red active"></li>
+        <li id=green class="green"></li>
+        <li id=blue class="blue"></li>
+    </ol>
+    <script src="//at.alicdn.com/t/font_903206_g36sp0iviwd.js"></script>
     <script type="text/javascript" src="./resources/js/main.js"></script>
 </body>
 </html>
