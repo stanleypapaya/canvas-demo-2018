@@ -1,5 +1,4 @@
-
-#xxx{
+#xxx {
     background: white;
     display: block;
     position: fixed;
@@ -7,19 +6,19 @@
     left: 0;
 }
 
-body{
+body {
     margin: 0px;
     overflow: hidden;
 }
 
-.actions{
+.actions {
     position: fixed;
     top: 0;
     left: 0;
     padding: 20px;
 }
 
-.actions svg{
+.actions svg {
     width: 1.5em;
     height: 1.5em;
     transition: all 0.3s;
@@ -30,23 +29,22 @@ body{
     margin: 0 10px;
 }
 
-.actions svg.active{
+.actions svg.active {
     fill: red;
     transform: scale(1.2);
     -webkit-transform: scale(1.2);
     -moz-transform: scale(1.2);
     -ms-transform: scale(1.2);
     -o-transform: scale(1.2);
-    
 }
 
-.colors{
+.colors {
     position: fixed;
     top: 60px;
     left: 28px;
 }
 
-.colors > li{
+.colors>li {
     width: 20px;
     height: 20px;
     border: 2px solid #DDD;
@@ -58,50 +56,49 @@ body{
     -o-border-radius: 50%;
 }
 
-
-.colors > li.black{
+.colors>li.black {
     background: black;
 }
 
-.colors > li.red{
+.colors>li.red {
     background: red;
 }
 
-.colors > li.green{
+.colors>li.green {
     background: green;
 }
 
-.colors > li.blue{
+.colors>li.blue {
     background: blue;
 }
 
-.colors > li.yellow{
+.colors>li.yellow {
     background: yellow;
 }
 
-.colors > li.orange{
+.colors>li.orange {
     background: orange;
 }
 
-.colors > li.active{
-    box-shadow: 0 0 5px rgba(0,0,0,0.95)
+.colors>li.active {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.95)
 }
 
-.size{
+.size {
     position: fixed;
     right: 20px;
     top: 30px;
 }
 
-.size > .thin{
+.size>.thin {
     height: 20px;
     width: 20px;
-    background: radial-gradient(ellipse at center, #131313 0%,#0f0f0f 14%,#ffffff 32%,#ffffff 70%,#cecece 100%); 
+    background: radial-gradient(ellipse at center, #131313 0%, #0f0f0f 14%, #ffffff 32%, #ffffff 70%, #cecece 100%);
     margin-bottom: 20px;
 }
 
-.size > .thick{
+.size>.thick {
     height: 20px;
     width: 20px;
-    background: radial-gradient(ellipse at center, #131313 0%,#0f0f0f 14%,#ffffff 65%,#cecece 100%);
+    background: radial-gradient(ellipse at center, #131313 0%, #0f0f0f 14%, #ffffff 65%, #cecece 100%);
 }

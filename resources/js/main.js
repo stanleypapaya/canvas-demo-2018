@@ -1,4 +1,3 @@
-
 var yyy = document.getElementById('xxx');
 var context = yyy.getContext('2d');
 
@@ -9,28 +8,28 @@ listenToUser(yyy)
 var lineWidth = 5
 
 var eraserEnabled = false
-eraser.onclick = function(){
-  eraserEnabled = true
-  eraser.classList.add('active')
-  brush.classList.remove('active')
+eraser.onclick = function () {
+    eraserEnabled = true
+    eraser.classList.add('active')
+    brush.classList.remove('active')
 }
 
-brush.onclick = function(){
-  eraserEnabled = false
-  brush.classList.add('active')
-  eraser.classList.remove('active')
+brush.onclick = function () {
+    eraserEnabled = false
+    brush.classList.add('active')
+    eraser.classList.remove('active')
 }
 
-clear.onclick = function(){
-    context.clearRect(0,0,yyy.width,yyy.height)
+clear.onclick = function () {
+    context.clearRect(0, 0, yyy.width, yyy.height)
 }
 
-download.onclick = function(){
-    var image = yyy.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
-    window.location.href=image; // it will save locally
+download.onclick = function () {
+    var image = yyy.toDataURL("image/png").replace("image/png", "image/octet-stream"); // here is the most important part because if you dont replace you will get a DOM 18 exception.
+    window.location.href = image; // it will save locally
 }
 
-black.onclick = function(){
+black.onclick = function () {
     context.fillStyle = 'black'
     context.strokeStyle = 'black'
     black.classList.add('active')
@@ -41,7 +40,7 @@ black.onclick = function(){
     orange.classList.remove('active')
 }
 
-red.onclick = function(){
+red.onclick = function () {
     context.fillStyle = 'red'
     context.strokeStyle = 'red'
     red.classList.add('active')
@@ -52,7 +51,7 @@ red.onclick = function(){
     orange.classList.remove('active')
 }
 
-green.onclick = function(){
+green.onclick = function () {
     context.fillStyle = 'green'
     context.strokeStyle = 'green'
     green.classList.add('active')
@@ -63,7 +62,7 @@ green.onclick = function(){
     orange.classList.remove('active')
 }
 
-blue.onclick = function(){
+blue.onclick = function () {
     context.fillStyle = 'blue'
     context.strokeStyle = 'blue'
     blue.classList.add('active')
@@ -74,7 +73,7 @@ blue.onclick = function(){
     orange.classList.remove('active')
 }
 
-yellow.onclick = function(){
+yellow.onclick = function () {
     context.fillStyle = 'yellow'
     context.strokeStyle = 'yellow'
     yellow.classList.add('active')
@@ -85,7 +84,7 @@ yellow.onclick = function(){
     orange.classList.remove('active')
 }
 
-orange.onclick = function(){
+orange.onclick = function () {
     context.fillStyle = 'orange'
     context.strokeStyle = 'orange'
     orange.classList.add('active')
@@ -96,119 +95,138 @@ orange.onclick = function(){
     blue.classList.remove('active')
 }
 
-thin.onclick = function(){
+thin.onclick = function () {
     lineWidth = 5
 }
 
-thick.onclick = function(){
+thick.onclick = function () {
     lineWidth = 10
 }
 
-function drawCircle(x,y,radius){
+function drawCircle(x, y, radius) {
     context.beginPath();
-    context.arc(x,y,radius,0,Math.PI*2);
+    context.arc(x, y, radius, 0, Math.PI * 2);
     context.fill();
 }
-  
-function drawLine(x1,y1,x2,y2){
-  context.beginPath()
-  context.moveTo(x1,y1)//起点
-  context.lineWidth = lineWidth
-  context.lineTo(x2,y2)//终点
-  context.stroke()
-  context.closePath()
+
+function drawLine(x1, y1, x2, y2) {
+    context.beginPath()
+    context.moveTo(x1, y1) //起点
+    context.lineWidth = lineWidth
+    context.lineTo(x2, y2) //终点
+    context.stroke()
+    context.closePath()
 }
 
-function autoSetCanvasSize(canvas){
-  setCanvasSize()
-
-  //用户调整宽高后自适应100%
-  window.onresize = function(){
+function autoSetCanvasSize(canvas) {
     setCanvasSize()
-  }
 
-function setCanvasSize(){
-    var pageWidth = document.documentElement.clientWidth
-    var pageHeight = document.documentElement.clientHeight
+    //用户调整宽高后自适应100%
+    window.onresize = function () {
+        setCanvasSize()
+    }
 
-    canvas.width = pageWidth
-    canvas.height = pageHeight
-  }
+    function setCanvasSize() {
+        var pageWidth = document.documentElement.clientWidth
+        var pageHeight = document.documentElement.clientHeight
+
+        canvas.width = pageWidth
+        canvas.height = pageHeight
+    }
 }
 
-function listenToUser(canvas){
-  
+function listenToUser(canvas) {
+
     var context = canvas.getContext('2d')
 
     var using = false;
-    var lastPoint = {x: undefined, y: undefined}
+    var lastPoint = {
+        x: undefined,
+        y: undefined
+    }
 
     //特性检测
-    if('ontouchstart' in document.documentElement){
+    if ('ontouchstart' in document.documentElement) {
         //触屏设备
-        canvas.ontouchstart = function(a){
+        canvas.ontouchstart = function (a) {
             var x = a.touches[0].clientX;
             var y = a.touches[0].clientY;
             using = true;
-            if(eraserEnabled){
-              context.clearRect(x-10,y-10,lineWidth*4,lineWidth*4)
-            }else {
-              lastPoint = {'x': x, 'y': y}
-              drawCircle(x,y,lineWidth/2)
-              }
-        }
-        canvas.ontouchmove = function(a){
-            var x = a.touches[0].clientX;
-            var y = a.touches[0].clientY;
-            
-            if(!using){return}
-            
-            if(eraserEnabled){
-              context.clearRect(x-10,y-10,lineWidth*4,lineWidth*4)
+            if (eraserEnabled) {
+                context.clearRect(x - 10, y - 10, lineWidth * 4, lineWidth * 4)
             } else {
-              var newPoint = {'x': x, 'y': y} 
-              drawCircle(x,y,lineWidth/2)  
-              drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)   
-              lastPoint = newPoint   
+                lastPoint = {
+                    'x': x,
+                    'y': y
+                }
+                drawCircle(x, y, lineWidth / 2)
             }
         }
-        canvas.ontouchend = function(a){
+        canvas.ontouchmove = function (a) {
+            var x = a.touches[0].clientX;
+            var y = a.touches[0].clientY;
+
+            if (!using) {
+                return
+            }
+
+            if (eraserEnabled) {
+                context.clearRect(x - 10, y - 10, lineWidth * 4, lineWidth * 4)
+            } else {
+                var newPoint = {
+                    'x': x,
+                    'y': y
+                }
+                drawCircle(x, y, lineWidth / 2)
+                drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+                lastPoint = newPoint
+            }
+        }
+        canvas.ontouchend = function (a) {
             using = false;
         }
-    
-    
-    } else{
+
+
+    } else {
         //非触屏设备
-        canvas.onmousedown = function(a){
+        canvas.onmousedown = function (a) {
             var x = a.clientX;
             var y = a.clientY;
             using = true;
-            if(eraserEnabled){
-              context.clearRect(x-10,y-10, lineWidth*4, lineWidth*4)
-            }else {
-              lastPoint = {'x': x, 'y': y}
-              drawCircle(x,y,lineWidth/2)
-              }
-          }
-      
-          canvas.onmousemove = function(a){
+            if (eraserEnabled) {
+                context.clearRect(x - 10, y - 10, lineWidth * 4, lineWidth * 4)
+            } else {
+                lastPoint = {
+                    'x': x,
+                    'y': y
+                }
+                drawCircle(x, y, lineWidth / 2)
+            }
+        }
+
+        canvas.onmousemove = function (a) {
             var x = a.clientX;
             var y = a.clientY;
-            
-            if(!using){return}
-            
-            if(eraserEnabled){
-              context.clearRect(x-10,y-10, lineWidth*4, lineWidth*4)
-            } else {
-              var newPoint = {'x': x, 'y': y}
-              drawCircle(x,y,lineWidth/2)  
-              drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)   
-              lastPoint = newPoint   
+
+            if (!using) {
+                return
             }
-          }
-      
-          canvas.onmouseup = function(a){
+
+            if (eraserEnabled) {
+                context.clearRect(x - 10, y - 10, lineWidth * 4, lineWidth * 4)
+            } else {
+                var newPoint = {
+                    'x': x,
+                    'y': y
+                }
+                drawCircle(x, y, lineWidth / 2)
+                drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+                lastPoint = newPoint
+            }
+        }
+
+        canvas.onmouseup = function (a) {
             using = false;
-          }
+        }
     }
 }
